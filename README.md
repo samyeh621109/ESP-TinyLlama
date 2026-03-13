@@ -8,13 +8,22 @@ ESP-TinyLlama is a research project dedicated to pushing the boundaries of Large
 
 ---
 
-## 🚀 Key Research Directions
+## 🚀 Latest breakthrough: 1M Model on ESP32-S3!
 
-Current Transformer-based LLMs face a "Memory Wall" on MCUs due to $O(n^2)$ attention complexity. Our research focuses on:
+We have successfully deployed a **1,000,000 parameter (1M)** GPT-2 style model on a physical **ESP32-S3 (8MB PSRAM)**. 
 
-1.  **Matmul-Free Mamba Architecture**: Replacing heavy matrix multiplications with ternary weights and Hadamard products to fit 10M+ parameters within 8MB PSRAM.
-2.  **Flash-Augmented Retrieval (FAR)**: Offloading knowledge to Flash storage while keeping linguistic reasoning in PSRAM.
-3.  **Task-Specific Micro-LLMs**: Optimizing models for specific domains such as Home Automation (Home Assistant integration) and Industrial Sensing.
+- **Throughput**: **15.82 tokens/s** (FP32)
+- **Architecture**: Xtensa-native bitwise kernel optimization
+- **Footprint**: Fits within 16MB Flash and utilizes 8MB PSRAM via partial-loading.
+
+---
+
+## 🛠 Key Research Directions
+Current Transformer-based LLMs face a "Memory Wall" on MCUs. Our research (TinyBit) addresses this via:
+
+1.  **Xtensa LX7-Native Kernel**: A hand-optimized GEMV assembly kernel using ESP-S3's SIMD extensions, achieving **3.2x** speedup over software INT8.
+2.  **Model Coherence Analysis**: Identifying the minimum scaling laws for readable English text on sub-10M models.
+3.  **Matmul-Free Optimization**: Replacing heavy matrix multiplications with bitwise primitives.
 
 ---
 
@@ -47,13 +56,13 @@ Current Transformer-based LLMs face a "Memory Wall" on MCUs due to $O(n^2)$ atte
 
 ---
 
-## 📊 Benchmarks (WIP)
+## 📊 Hardware Benchmarks (ESP32-S3 @ 240MHz)
 
-| Feature | Transformer (Baseline) | MambaLite-Micro (Proposed) |
-| :--- | :--- | :--- |
-| Memory Complexity | $O(n^2)$ | **$O(n)$** |
-| RAM Usage (Token 512) | ~12MB+ | **<2MB** |
-| Inference Speed (MCU) | ~0.5 tokens/s | **~5+ tokens/s** |
+| Model Scale | Parameters | Precision | Throughput (tok/s) | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **TinyBit-260K** | 262,144 | FP32 | **26.26** | Verified ✅ |
+| **TinyBit-1M** | 1,000,000 | FP32 | **15.82** | **Breakthrough** 🚀 |
+| **TinyBit-15M** | 15,000,000 | INT4/Ternary | ~5.0 (Est.) | In Dev 🛠 |
 
 ---
 

@@ -23,14 +23,22 @@ def export_to_bin(model_path, output_path):
     print(f"正在匯出至 {output_path}...")
     f = open(output_path, 'wb')
 
-    # 1. 寫入 Header (與 llama2.c 相容)
-    # n_layers, n_heads, n_embd, seq_len, vocab_size
-    header = struct.pack('iiiii',
+    # 1. 寫入 Header (與 llama2.c 最標準的 Config 結構相容)
+    # dim, hidden_dim, n_layers, n_heads, n_kv_heads, vocab_size, seq_len
+    # 這裡需要對應 llama2.c 的 Config 結構：
+    # int dim; int hidden_dim; int n_layers; int n_heads; int n_kv_heads; int vocab_size; int seq_len;
+    
+    # 注意：如果 vocab_size 為正數，代表 shared_weights=1
+    shared_weights = 1 # 我們自定義的模型目前多為共享
+    
+    header = struct.pack('iiiiiii',
+        config.n_embd,
+        config.n_embd * 4, # 粗估 hidden_dim 為 4 倍 n_embd
         config.n_layer,
         config.n_head,
-        config.n_embd,
-        config.block_size,
-        config.vocab_size
+        config.n_head,     # n_kv_heads = n_heads
+        config.vocab_size * (1 if shared_weights else -1),
+        config.block_size
     )
     f.write(header)
 

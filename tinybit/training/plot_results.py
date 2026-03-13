@@ -1,69 +1,64 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
+import numpy as np
 
-# 設定
-CSV_FILE = "training/data/results.csv"
-OUTPUT_DIR = "paper/figures"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# 設定圖表風格
+sns.set_theme(style="whitegrid")
+plt.rcParams['font.sans-serif'] = ['Arial']
+plt.rcParams['axes.unicode_minus'] = False
 
-def plot_results():
-    if not os.path.exists(CSV_FILE):
-        print(f"找不到數據檔案: {CSV_FILE}")
-        print("請確保已經開始訓練並產生了數據！")
+def plot_training_results(csv_path, output_dir):
+    try:
+        df = pd.read_csv(csv_path)
+    except Exception as e:
+        print(f"無法讀取 CSV: {e}")
         return
 
-    # 讀取數據
-    df = pd.read_csv(CSV_FILE)
-    
-    if df.empty:
-        print("數據檔案是空的。")
-        return
+    # 確保資料型態正確
+    df['iter'] = df['iter'].astype(int)
+    df['val_loss'] = df['val_loss'].astype(float)
+    df['perplexity'] = df['perplexity'].astype(float)
 
-    # 設定繪圖風格
-    sns.set_theme(style="whitegrid")
-    plt.rcParams['font.sans-serif'] = ['Arial']
-    
-    # 1. 訓練曲線 (Loss vs Iterations)
-    plt.figure(figsize=(10, 6))
-    for config in df['config'].unique():
-        subset = df[df['config'] == config]
-        plt.plot(subset['iter'], subset['val_loss'], label=f"TinyBit-{config}")
-    
-    plt.title("Model Convergence: Validation Loss", fontsize=14)
-    plt.xlabel("Iterations", fontsize=12)
-    plt.ylabel("Cross-Entropy Loss", fontsize=12)
-    plt.legend()
-    plt.savefig(f"{OUTPUT_DIR}/convergence.pdf", bbox_inches='tight')
-    plt.savefig(f"{OUTPUT_DIR}/convergence.png", dpi=300, bbox_inches='tight')
-    print(f"已儲存收斂圖至 {OUTPUT_DIR}/convergence.pdf")
+    configs = ["1M", "3M", "8M", "15M"]
+    colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
 
-    # 2. 規模 vs. 連貫度 (Perplexity vs Model Size)
-    # 取每個配置最後一個記錄 (假設是訓練最久的)
-    latest = df.groupby('config').tail(1).copy()
+    # 1. 繪製 Validation Loss 曲線
+    plt.figure(figsize=(10, 6), dpi=300)
+    for cfg, col in zip(configs, colors):
+        subset = df[df['config'] == cfg]
+        if not subset.empty:
+            plt.plot(subset['iter'], subset['val_loss'], label=f'{cfg} Model', color=col, linewidth=2, alpha=0.9)
     
-    # 手動對應模型大小 (1M, 3M, 8M, 15M)
-    size_map = {"1M": 1, "3M": 3, "8M": 8, "15M": 15}
-    latest['size_mb'] = latest['config'].map(size_map)
-    latest = latest.sort_values('size_mb')
-
-    plt.figure(figsize=(8, 6))
-    plt.plot(latest['size_mb'], latest['perplexity'], marker='o', linewidth=2, markersize=8, color='#2ecc71')
-    
-    # 在點上方標註數值
-    for i, txt in enumerate(latest['perplexity']):
-        plt.annotate(f"{txt:.2f}", (latest['size_mb'].iloc[i], latest['perplexity'].iloc[i]), 
-                     xytext=(0, 10), textcoords='offset points', ha='center')
-
-    plt.title("Scaling Laws: Model Size vs. Perplexity", fontsize=14)
-    plt.xlabel("Model Size (Millions of Parameters)", fontsize=12)
-    plt.ylabel("Perplexity (Lower is Better)", fontsize=12)
-    plt.xticks([1, 3, 8, 15])
+    plt.title('Validation Loss over Training Iterations', fontsize=16, fontweight='bold', pad=15)
+    plt.xlabel('Training Iterations', fontsize=14)
+    plt.ylabel('Validation Loss', fontsize=14)
+    plt.legend(fontsize=12, loc='upper right')
     plt.grid(True, linestyle='--', alpha=0.7)
-    plt.savefig(f"{OUTPUT_DIR}/scaling_laws.pdf", bbox_inches='tight')
-    plt.savefig(f"{OUTPUT_DIR}/scaling_laws.png", dpi=300, bbox_inches='tight')
-    print(f"已儲存連貫度分析圖至 {OUTPUT_DIR}/scaling_laws.pdf")
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/validation_loss_curve.pdf", format='pdf', bbox_inches='tight')
+    plt.close()
+
+    # 2. 繪製 Perplexity 曲線 (建議使用對數刻度，因為初期 PPL 非常高)
+    plt.figure(figsize=(10, 6), dpi=300)
+    for cfg, col in zip(configs, colors):
+        subset = df[df['config'] == cfg]
+        if not subset.empty:
+            plt.plot(subset['iter'], subset['perplexity'], label=f'{cfg} Model', color=col, linewidth=2, alpha=0.9)
+    
+    plt.title('Validation Perplexity over Training Iterations', fontsize=16, fontweight='bold', pad=15)
+    plt.xlabel('Training Iterations', fontsize=14)
+    plt.ylabel('Validation Perplexity (Log Scale)', fontsize=14)
+    plt.yscale('log')
+    plt.legend(fontsize=12, loc='upper right')
+    plt.grid(True, which="both", linestyle='--', alpha=0.5)
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/perplexity_curve.pdf", format='pdf', bbox_inches='tight')
+    plt.close()
+
+    print(f"✅ 圖表已成功匯出至 {output_dir}/validation_loss_curve.pdf 和 perplexity_curve.pdf")
 
 if __name__ == "__main__":
-    plot_results()
+    import os
+    os.makedirs("/Volumes/T7/needs/llm_star/paper/figures", exist_ok=True)
+    plot_training_results("/Volumes/T7/needs/llm_star/tinybit/training/data/results.csv", "/Volumes/T7/needs/llm_star/paper/figures")
