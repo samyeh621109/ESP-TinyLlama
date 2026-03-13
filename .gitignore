@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Model Output & Checkpoints
+out/
+*.pt
+*.bin
+*.safetensors
+*.pth
+
+# Data & Thesis Materials
+data/
+training/data/
+paper/
+docs/
+*.csv
+*.xlsx
+*.doc
+*.docx
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+env/
+.venv/
+.pytest_cache/
+
+# ESP-IDF
+build/
+sdkconfig.old

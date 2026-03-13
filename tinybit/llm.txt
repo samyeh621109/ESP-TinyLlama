@@ -1,0 +1,163 @@
+nvidia-smi
+Fri Mar 13 09:57:42 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 590.48.01              Driver Version: 590.48.01      CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4060 ...    Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   37C    P0            590W /   80W |      11MiB /   8188MiB |     13%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1793      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+sam@sam-predatorphn1671:~$ source /home/sam/comfyui-venv/bin/activate
+(comfyui-venv) sam@sam-predatorphn1671:~$ python --version
+Python 3.13.12
+
+(comfyui-venv) sam@sam-predatorphn1671:~$ python
+Python 3.13.12 (main, Feb  4 2026, 09:25:39) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> print(torch.__version__)
+2.10.0+cu130
+>>> print(torch.cuda.is_available())
+...
+True
+>>> print(torch.version.cuda)
+13.0
+>>>
+
+pip install transformers datasets accelerate sentencepiece wandb mauve-text tqdm
+
+python -c 'import torch; import transformers; import accelerate; print("All good!")'
+All good!
+
+
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+python training/train.py --config 1M --batch_size 8
+使用設備: cuda
+Iter 0: loss 10.9989, time 19.15ms
+Validation loss: 10.9645, Perplexity: 57787.07
+儲存最佳模型至 out/1M/ckpt.pt
+Iter 10: loss 10.6885, time 58.79ms
+Iter 20: loss 9.8761, time 42.25ms
+Iter 30: loss 9.0317, time 42.31ms
+Iter 40: loss 8.3851, time 42.24ms
+Iter 50: loss 7.7547, time 42.35ms
+Iter 60: loss 7.2239, time 42.28ms
+Iter 70: loss 6.7239, time 42.23ms
+Iter 80: loss 6.4755, time 42.28ms
+Iter 90: loss 6.2478, time 42.22ms
+Iter 100: loss 6.1508, time 42.27ms
+Iter 110: loss 6.2825, time 42.27ms
+Iter 120: loss 6.1022, time 42.34ms
+Iter 130: loss 6.1219, time 42.25ms
+Iter 140: loss 5.9450, time 42.25ms
+Iter 150: loss 6.0191, time 42.32ms
+Iter 160: loss 6.0043, time 42.26ms
+
+改成新版
+
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+python training/train-new.py --config 1M --batch_size 4 --max_iters 25000
+使用設備: cuda
+✅ 成功從 checkpoint 繼續訓練！目前 iter = 7000
+Iter 7000: loss 4.7435, time 18.75ms
+Validation loss: 4.6996, Perplexity: 109.90
+儲存最佳模型至 out/1M/ckpt.pt
+Iter 7010: loss 4.6530, time 33.67ms
+Iter 7020: loss 4.6366, time 17.61ms
+Iter 7030: loss 4.7880, time 17.54ms
+Iter 7040: loss 4.6144, time 17.59ms
+Iter 7050: loss 4.7977, time 17.54ms
+Iter 7060: loss 4.8752, time 17.61ms
+Iter 7070: loss 4.7232, time 17.52ms
+Iter 7080: loss 4.5228, time 17.59ms
+Iter 7090: loss 4.7210, time 17.53ms
+Iter 7100: loss 4.6199, time 17.60ms
+Iter 7110: loss 4.9459, time 17.53ms
+Iter 7120: loss 4.5515, time 17.59ms
+Iter 7130: loss 4.5433, time 17.55ms
+Iter 7140: loss 4.6718, time 17.58ms
+Iter 7150: loss 4.5793, time 17.54ms
+Iter 7160: loss 4.5786, time 17.62ms
+Iter 7170: loss 4.8318, time 17.58ms
+Iter 7180: loss 4.4710, time 17.61ms
+Iter 7190: loss 4.8775, time 17.58ms
+Iter 7200: loss 4.9436, time 17.66ms
+Iter 7210: loss 4.7030, time 17.55ms
+Iter 7220: loss 4.7411, time 17.60ms
+Iter 7230: loss 4.7300, time 17.55ms
+Iter 7240: loss 4.6343, time 17.60ms
+Iter 7250: loss 4.8204, time 17.54ms
+Iter 7260: loss 4.6147, time 17.59ms
+Iter 7270: loss 4.7537, time 17.51ms
+Iter 7280: loss 4.5730, time 17.56ms
+Iter 7290: loss 4.6831, time 17.52ms
+Iter 7300: loss 4.7222, time 17.58ms
+Iter 7310: loss 4.6507, time 17.52ms
+Iter 7320: loss 4.6519, time 17.57ms
+Iter 7330: loss 4.6749, time 17.53ms
+Iter 7340: loss 4.7042, time 17.60ms
+Iter 7350: loss 4.8588, time 17.55ms
+Iter 7360: loss 4.7008, time 17.59ms
+Iter 7370: loss 4.7336, time 17.55ms
+Iter 7380: loss 4.7728, time 17.61ms
+Iter 7390: loss 4.4933, time 17.55ms
+Iter 7400: loss 4.6380, time 17.61ms
+Iter 7410: loss 4.5917, time 17.72ms
+Iter 7420: loss 4.8558, time 17.73ms
+Iter 7430: loss 4.5810, time 17.56ms
+Iter 7440: loss 4.8039, time 17.65ms
+Iter 7450: loss 4.7676, time 17.57ms
+Iter 7460: loss 4.7034, time 17.69ms
+Iter 7470: loss 4.6056, time 17.59ms
+Iter 7480: loss 4.6676, time 17.61ms
+Iter 7490: loss 4.5561, time 17.56ms
+Iter 7500: loss 4.6206, time 17.62ms
+Validation loss: 4.6690, Perplexity: 106.59
+儲存最佳模型至 out/1M/ckpt.pt
+Iter 7510: loss 4.7483, time 25.76ms
+Iter 7520: loss 4.7362, time 17.78ms
+Iter 7530: loss 4.7655, time 17.54ms
+Iter 7540: loss 4.6667, time 17.68ms
+Iter 7550: loss 4.7030, time 17.65ms
+Iter 7560: loss 4.5378, time 17.63ms
+Iter 7570: loss 4.5919, time 17.67ms
+Iter 7580: loss 4.6883, time 17.63ms
+Iter 7590: loss 4.4210, time 17.57ms
+Iter 7600: loss 4.7390, time 17.63ms
+Iter 7610: loss 4.4315, time 17.57ms
+Iter 7620: loss 4.5313, time 17.64ms
+Iter 7630: loss 4.7995, time 17.54ms
+Iter 7640: loss 4.8510, time 17.66ms
+Iter 7650: loss 4.6619, time 17.53ms
+Iter 7660: loss 4.6046, time 17.65ms
+Iter 7670: loss 4.7726, time 17.56ms
+Iter 7680: loss 4.5407, time 17.64ms
+Iter 7690: loss 4.6565, time 17.57ms
+Iter 7700: loss 4.9084, time 17.97ms
+Iter 7710: loss 4.6186, time 17.57ms
+Iter 7720: loss 4.7969, time 17.62ms
+Iter 7730: loss 4.7643, time 17.58ms
+Iter 7740: loss 4.6420, time 17.64ms
+Iter 7750: loss 4.7607, time 17.56ms
+Iter 7760: loss 4.6128, time 17.63ms
+Iter 7770: loss 4.7911, time 17.55ms
+
+
+python training/export-new.py --model_path out/1M/ckpt.pt --output_path out/1M/model.bin
+python training/train-new.py --config 3M --batch_size 4 --max_iters 50000
+python training/train-new.py --config 8M --batch_size 2 --max_iters 80000
+python training/train-new.py --config 15M --batch_size 1 --max_iters 120000
