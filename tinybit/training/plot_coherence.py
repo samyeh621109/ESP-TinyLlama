@@ -1,13 +1,13 @@
 import json
 import os
 import matplotlib
-matplotlib.use('Agg')  # 無 GUI 環境也能跑
+matplotlib.use('Agg')  # Backend without GUI
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import pandas as pd
 import numpy as np
 
-# ─── 論文級圖表全域設定 ───
+# Global settings for publication-quality plots
 plt.rcParams.update({
     'font.family': 'serif',
     'font.serif': ['Times New Roman', 'DejaVu Serif'],
@@ -26,7 +26,7 @@ plt.rcParams.update({
     'lines.markersize': 7,
 })
 
-# 學術配色 (色盲友好)
+# Colorblind-friendly academic color scheme
 COLOR_GPT = '#2c3e50'       # 深藍灰
 COLOR_MAMBA = '#c0392b'     # 暗紅
 COLOR_ENTROPY = '#16a085'   # 深綠
@@ -50,7 +50,7 @@ def main():
 
     df_eval = pd.DataFrame(data)
     
-    # ─── 1. 計算各 scale 的統計量 ───
+    # 1. Aggregation of metrics by model scale
     stats = df_eval.groupby('scale').agg({
         'entropy': 'mean',
         'repetition_ratio': 'mean'
@@ -81,7 +81,7 @@ def main():
     stats_gpt = stats[~stats['is_mamba']].sort_values('params')
     stats_mamba = stats[stats['is_mamba']].sort_values('params')
 
-    # ─── 2. 訓練曲線對比圖 (Val Loss) ───
+    # 2. Training Convergence Comparison (Validation Loss)
     if os.path.exists(training_results_path) and os.path.exists(mamba_results_path):
         df_train = pd.read_csv(training_results_path)
         df_mamba_train = pd.read_csv(mamba_results_path)
@@ -124,7 +124,7 @@ def main():
         plt.close()
         print(f"  ✓ training_curves_comparison.png / .pdf")
 
-    # ─── 3. Auto Metrics 對比圖 ───
+    # 3. Automated Productivity Metrics (Entropy & Repetition)
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.2))
     
     # --- 左: Text Entropy ---
@@ -171,7 +171,7 @@ def main():
     plt.close()
     print(f"  ✓ auto_metrics.png / .pdf")
 
-    # ─── 4. Coherence Judge 圖 (如果有 Gemini 評分數據) ───
+    # 4. Coherence Evaluation (LLM-based scoring)
     if 'avg_judge' in stats.columns and not stats['avg_judge'].isnull().all():
         fig, ax = plt.subplots(figsize=(7, 4.5))
         
