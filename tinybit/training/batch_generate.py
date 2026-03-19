@@ -1,3 +1,7 @@
+import sys
+import os
+# 把父目錄加入搜尋路徑
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import torch
 import time
 import json
@@ -37,11 +41,26 @@ def load_model(scale, ckpt_path, device='cpu'):
 def generate(model, config, enc, prompt, max_new_tokens=100, device='cpu'):
     input_ids = enc.encode(prompt)
     x = torch.tensor(input_ids, dtype=torch.long, device=device).unsqueeze(0)
-    
-    if hasattr(model, 'generate'):
-        # 使用 Mamba 的 generate 方法
-        output_ids = model.generate(x, max_new_tokens=max_new_tokens, temperature=0.8, top_k=40)
-        return enc.decode(output_ids[0].tolist())
+
+    if isinstance(model, TernaryMambaLMHeadModel):
+        # Mamba 手動生成邏輯
+        generated = list(input_ids)
+        with torch.no_grad():
+            for _ in range(max_new_tokens):
+                logits = model(x)  # Mamba 只回傳 logits
+                # 如果回傳的是物件而非 tensor，取出 logits
+                if not isinstance(logits, torch.Tensor):
+                    logits = logits.logits
+                logits = logits[:, -1, :] / 0.8  # temperature
+                # top-k
+                top_k = 40
+                values, _ = torch.topk(logits, top_k)
+                logits[logits < values[:, -1:]] = float('-inf')
+                probs = torch.nn.functional.softmax(logits, dim=-1)
+                idx_next = torch.multinomial(probs, num_samples=1)
+                x = torch.cat((x, idx_next), dim=1)
+                generated.append(idx_next.item())
+        return enc.decode(generated)
     else:
         # GPT 原有的生成邏輯
         generated = list(input_ids)
