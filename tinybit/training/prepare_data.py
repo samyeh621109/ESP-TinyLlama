@@ -13,8 +13,7 @@ def download_and_preprocess():
     print("正在從 Hugging Face 下載 TinyStories 資料集...")
     dataset = load_dataset("roneneldan/TinyStories")
     
-    # 我們使用一個簡單的 GPT-2 tokenizer (為了實驗方便)
-    # 或是你有自定義的 tokenizer can be loaded here
+    # 使用標準 gpt2 tokenizer 進行編碼
     print("載入 Tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
     tokenizer.pad_token = tokenizer.eos_token
