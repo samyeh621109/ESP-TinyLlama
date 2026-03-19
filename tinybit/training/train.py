@@ -30,11 +30,15 @@ def train(args):
     train_data = np.fromfile("training/data/train.bin", dtype=np.uint16)
     val_data = np.fromfile("training/data/validation.bin", dtype=np.uint16)
     
+    # 這裡的 vocab_size 必須對應自定義 Tokenizer (e.g., 32000)
+    # 如果未來需要更靈活，可以從 tokenizer.json 讀取
+    VOCAB_SIZE = args.vocab_size 
+    
     # 模型配置
     conf_params = configs[args.config]
     config = GPTConfig(
-        vocab_size=50257, 
-        block_size=512, 
+        vocab_size=VOCAB_SIZE, 
+        block_size=args.block_size, 
         **conf_params
     )
     model = GPT(config).to(device)
@@ -107,6 +111,8 @@ def train(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, default="1M", choices=["1M", "3M", "8M", "15M"])
+    parser.add_argument("--vocab_size", type=int, default=32000)
+    parser.add_argument("--block_size", type=int, default=512)
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--max_iters", type=int, default=50000)
     parser.add_argument("--lr", type=float, default=6e-4)

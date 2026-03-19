@@ -1,0 +1,16 @@
+ 
+python training/mamba/test_generate.py
+Loading model from out/mamba_8M/ckpt.pt...
+
+Prompt: Once upon a time, in a small village,
+Generated: Once upon a time, in a small village, there was a big button in the sky. It was the town in the bush, and the same thing was to ask his friends. The bunny was happy that he was curious. The little boy was very surprised.
+
+Finally, the frog
+
+Prompt: The robot looked at the flower and said,
+Generated: The robot looked at the flower and said, "I made a big slide again. You can do that on the train." Bob was very happy and thanked Lily for the way to take the dog in the pond.
+
+Prompt: In the year 2050, humans finally discovered
+Generated: In the year 2050, humans finally discovered a pond.
+
+When the butterfly arrived, the little girl enjoyed the town, and the little bird was happy. She had never seen anything so nice again.

@@ -1,0 +1,125 @@
+% =============================================
+% Section 3: Problem Formulation
+% =============================================
+\section{Problem Formulation}
+\label{sec:problem}
+
+We formalize the constrained language model inference problem on
+microcontrollers as a multi-objective optimization over model capacity,
+deployment footprint, and language coherence.
+
+\subsection{Hardware Constraint Model}
+
+The \espss{} defines the following resource envelope:
+
+\begin{table}[H]
+\centering
+\caption{Resource constraints of the \espss{} platform.}
+\label{tab:constraints}
+\small
+\begin{tabular}{lrl}
+\toprule
+\textbf{Resource} & \textbf{Capacity} & \textbf{Role} \\
+\midrule
+Internal SRAM   & 512\,KB  & Stack, runtime variables \\
+External \psram{} & 8\,MB & Model weights, KV-cache \\
+Flash storage   & 16\,MB  & Firmware, model file, tokenizer \\
+CPU frequency   & 240\,MHz & Inference computation \\
+SIMD width      & 128-bit  & EE vector instructions \\
+FPU             & None$^*$ & No hardware FP support \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize $^*$Software FP emulation available but extremely slow.}
+\end{tabular}
+\end{table}
+
+Let $M_{\text{psram}} = 8$\,MB denote the \psram{} budget and
+$M_{\text{flash}} = 16$\,MB the Flash budget (minus firmware overhead).
+A deployed model must satisfy:
+
+\begin{equation}
+\underbrace{|\theta|_q}_{\text{quantized weights}}
++ \underbrace{S_{\text{kv}}}_{\text{KV-cache}}
++ \underbrace{S_{\text{act}}}_{\text{activations}}
+\leq M_{\text{psram}}
+\label{eq:memory_constraint}
+\end{equation}
+
+\noindent where $|\theta|_q$ is the size of the quantized model parameters,
+$S_{\text{kv}} = 2 \cdot n_{\text{layers}} \cdot n_{\text{kv\_heads}} \cdot
+d_{\text{head}} \cdot L \cdot b$ is the KV-cache size for sequence length $L$
+and precision $b$ bytes per element, and $S_{\text{act}}$ accounts for
+intermediate activations during inference.
+
+\subsection{Language Coherence Metric}
+
+We define a composite coherence score $\mathcal{C}$ that captures multiple
+dimensions of language quality:
+
+\begin{equation}
+\mathcal{C}(m) = w_1 \cdot \hat{P}(m) + w_2 \cdot \text{MAUVE}(m) + w_3 \cdot \text{Judge}(m)
+\label{eq:coherence}
+\end{equation}
+
+\noindent where:
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt]
+  \item $\hat{P}(m) = 1 - \frac{\log \text{PPL}(m)}{\log \text{PPL}_{\max}}$
+        is the normalized inverse log-perplexity, scaled so that lower
+        perplexity yields higher scores;
+  \item $\text{MAUVE}(m) \in [0,1]$ measures distributional similarity to
+        human-generated text~\cite{pillutla2021mauve};
+  \item $\text{Judge}(m) \in [0,1]$ is the normalized LLM-as-judge score,
+        following the TinyStories evaluation protocol adapted with
+        GPT-4o~\cite{eldan2023tinystories};
+  \item $w_1, w_2, w_3$ are weighting coefficients summing to 1.
+\end{itemize}
+
+\subsection{Optimization Objective}
+
+The \tinybit{} design problem can be stated as:
+
+\begin{equation}
+\begin{aligned}
+\max_{\theta, q} \quad & \mathcal{C}(\theta, q) \\
+\text{s.t.} \quad & |\theta|_q + S_{\text{kv}} + S_{\text{act}} \leq M_{\text{psram}} \\
+& |\theta|_q + S_{\text{tok}} + S_{\text{fw}} \leq M_{\text{flash}} \\
+& \text{Latency}(\theta, q) \leq T_{\max}
+\end{aligned}
+\label{eq:optimization}
+\end{equation}
+
+\noindent where $q \in \{\text{FP32}, \text{INT8}, \text{INT4}, \text{Ternary}\}$
+is the quantization scheme, $S_{\text{tok}}$ is the tokenizer size,
+$S_{\text{fw}}$ is the firmware size, and $T_{\max}$ is the maximum acceptable
+latency per token (we target $\leq 1$\,s, i.e., $\geq 1$ token/s).
+
+This formulation makes explicit that the problem is not simply ``make the model
+smaller,'' but rather finding the optimal point on the Pareto frontier of
+model capacity, quantization aggressiveness, and coherence quality, all within
+the hard constraints imposed by the microcontroller hardware.
+
+\subsection{Ternary Weight Representation}
+
+For the Xtensa kernel design (Section~\ref{sec:kernel}), we adopt the ternary
+weight encoding of BitNet b1.58~\cite{ma2024bitnet}:
+
+\begin{equation}
+W_{ij} \in \{-1, 0, +1\}, \quad \text{encoded as 2 bits: } \begin{cases}
+00 \rightarrow 0 \\
+01 \rightarrow +1 \\
+10 \rightarrow -1
+\end{cases}
+\label{eq:ternary}
+\end{equation}
+
+This encoding enables the \gemv{} operation $\mathbf{y} = W\mathbf{x}$ to be
+decomposed into purely bitwise operations:
+
+\begin{equation}
+y_i = \sum_{j} W_{ij} \cdot x_j
+    = \sum_{j \in \mathcal{P}_i} x_j - \sum_{j \in \mathcal{N}_i} x_j
+\label{eq:bitwise_gemv}
+\end{equation}
+
+\noindent where $\mathcal{P}_i = \{j : W_{ij} = +1\}$ and
+$\mathcal{N}_i = \{j : W_{ij} = -1\}$, eliminating all multiplication
+operations.

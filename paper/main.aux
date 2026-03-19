@@ -1,0 +1,158 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{openai2023gpt4}
+\citation{touvron2023llama}
+\citation{team2023gemini}
+\citation{karpathy2023llama2c}
+\citation{eldan2023tinystories}
+\citation{ma2024bitnet}
+\citation{zhu2024matmulfree}
+\citation{mambalite2024}
+\citation{radford2019language}
+\citation{pillutla2021mauve}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{1}{Introduction}{section.1}{}}
+\citation{eldan2023tinystories}
+\citation{gunasekar2023textbooks}
+\citation{wang2023bitnet}
+\citation{ma2024bitnet}
+\citation{bitnet2b4t2025}
+\citation{zhu2024matmulfree}
+\citation{karpathy2023llama2c}
+\citation{mambalite2024}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Small Language Models}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Low-Bit and Ternary LLM Architectures}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Language Model Inference on Microcontrollers}{2}{subsection.2.3}\protected@file@percent }
+\citation{llama4micro}
+\citation{eldan2023tinystories}
+\citation{ma2024bitnet}
+\citation{zhu2024matmulfree}
+\citation{karpathy2023llama2c}
+\citation{mambalite2024}
+\citation{pillutla2021mauve}
+\citation{eldan2023tinystories}
+\citation{ma2024bitnet}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Edge LLMs vs. Legacy Keyword Spotting}{3}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Positioning of This Work}{3}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Formulation}{3}{section.3}\protected@file@percent }
+\newlabel{sec:problem}{{3}{3}{Problem Formulation}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Hardware Constraint Model}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Resource constraints of the ESP32-S3{} platform.}}{3}{table.caption.3}\protected@file@percent }
+\newlabel{tab:constraints}{{2}{3}{Resource constraints of the \espss {} platform}{table.caption.3}{}}
+\newlabel{eq:memory_constraint}{{1}{3}{Hardware Constraint Model}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Language Coherence Metric}{3}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:coherence}{{2}{3}{Language Coherence Metric}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Optimization Objective}{3}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:optimization}{{3}{3}{Optimization Objective}{equation.3}{}}
+\citation{radford2019language}
+\citation{eldan2023tinystories}
+\citation{ma2024bitnet}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of \textsc  {TinyBit}{} with related work in efficient LLM inference.}}{4}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:comparison}{{1}{4}{Comparison of \tinybit {} with related work in efficient LLM inference}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Ternary Weight Representation}{4}{subsection.3.4}\protected@file@percent }
+\newlabel{eq:ternary}{{4}{4}{Ternary Weight Representation}{equation.4}{}}
+\newlabel{eq:bitwise_gemv}{{5}{4}{Ternary Weight Representation}{equation.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Language Coherence Lower Bound Analysis}{4}{section.4}\protected@file@percent }
+\newlabel{sec:coherence}{{4}{4}{Language Coherence Lower Bound Analysis}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Model Architecture}{4}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Model configurations for coherence experiments.}}{4}{table.caption.4}\protected@file@percent }
+\newlabel{tab:model_configs}{{3}{4}{Model configurations for coherence experiments}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Training Data}{4}{subsubsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Training Configuration}{4}{subsubsection.4.1.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Training hyperparameters (common across all model sizes).}}{4}{table.caption.5}\protected@file@percent }
+\newlabel{tab:training}{{4}{4}{Training hyperparameters (common across all model sizes)}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Quantization Pipeline}{4}{subsection.4.2}\protected@file@percent }
+\citation{pillutla2021mauve}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Model sizes (MB) after quantization.}}{5}{table.caption.6}\protected@file@percent }
+\newlabel{tab:quantized_sizes}{{5}{5}{Model sizes (MB) after quantization}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Evaluation Methodology}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Perplexity (PPL)}{5}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}MAUVE Score}{5}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}LLM-as-Judge}{5}{subsubsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Results}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Validation loss convergence over 5,000 training iterations for four different model scales. All models were trained on the TinyStories dataset using identical hyperparameters to isolate the effect of parameter scaling.}}{5}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:convergence}{{1}{5}{Validation loss convergence over 5,000 training iterations for four different model scales. All models were trained on the TinyStories dataset using identical hyperparameters to isolate the effect of parameter scaling}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Relationship between model parameter count and validation perplexity. We observe an apparent "coherence cliff" below 3M parameters, where the model struggles to maintain basic sentence structure.}}{5}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:scaling}{{2}{5}{Relationship between model parameter count and validation perplexity. We observe an apparent "coherence cliff" below 3M parameters, where the model struggles to maintain basic sentence structure}{figure.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Full metric breakdown (PPL, MAUVE, Judge scores).}}{5}{table.caption.9}\protected@file@percent }
+\newlabel{tab:results_summary}{{6}{5}{Full metric breakdown (PPL, MAUVE, Judge scores)}{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Preliminary Baseline}{6}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Xtensa-Native Bitwise Inference Kernel}{6}{section.5}\protected@file@percent }
+\newlabel{sec:kernel}{{5}{6}{Xtensa-Native Bitwise Inference Kernel}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Xtensa LX7 Architecture Overview}{6}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Ternary GEMV Kernel Design}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Weight Packing}{6}{subsubsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Bitwise GEMV Algorithm}{6}{subsubsection.5.2.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Ternary \textsc  {GEMV}{} --- single output element $y_i$}}{6}{algorithm.1}\protected@file@percent }
+\newlabel{alg:ternary_gemv}{{1}{6}{Ternary \gemv {} --- single output element $y_i$}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}SIMD Optimization}{6}{subsubsection.5.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Memory Layout Optimization}{6}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Cache-Friendly Access Pattern}{6}{subsubsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Tiled Computation}{6}{subsubsection.5.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Implementation Summary}{7}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}End-to-End Evaluation}{7}{section.6}\protected@file@percent }
+\newlabel{sec:evaluation}{{6}{7}{End-to-End Evaluation}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Experimental Platform}{7}{subsection.6.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Hardware and software platform specifications.}}{7}{table.caption.10}\protected@file@percent }
+\newlabel{tab:platform}{{7}{7}{Hardware and software platform specifications}{table.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Pre-training Scaling Analysis}{7}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:scaling_analysis}{{6.2}{7}{Pre-training Scaling Analysis}{subsection.6.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Pre-training results across parameter scales.}}{7}{table.caption.11}\protected@file@percent }
+\newlabel{tab:model_scaling}{{8}{7}{Pre-training results across parameter scales}{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Validation Loss convergence (1M to 15M parameters).}}{7}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:val_loss}{{3}{7}{Validation Loss convergence (1M to 15M parameters)}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Validation Perplexity decay (Logarithmic scale).}}{7}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:perplexity}{{4}{7}{Validation Perplexity decay (Logarithmic scale)}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Architectural Design Rationale}{7}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:arch_design}{{6.3}{7}{Architectural Design Rationale}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}On-Device Hardware Evaluation}{7}{subsection.6.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Hardware Performance Evaluation on ESP32-S3}}{8}{table.caption.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Kernel Performance Comparison}{8}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Ternary-Mamba Evaluation}{8}{subsection.6.6}\protected@file@percent }
+\newlabel{sec:ternary_mamba_eval}{{6.6}{8}{Ternary-Mamba Evaluation}{subsection.6.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.6.1}Architecture}{8}{subsubsection.6.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.6.2}Training Convergence}{8}{subsubsection.6.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Convergence comparison at the 8M parameter scale.}}{8}{table.caption.16}\protected@file@percent }
+\newlabel{tab:ternary_comparison}{{10}{8}{Convergence comparison at the 8M parameter scale}{table.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Training convergence comparison between GPT-2 8M (FP32) and Ternary-Mamba 8M (1.58-bit). (a)~Validation loss. (b)~Perplexity (initial outliers $>500$ omitted for clarity).}}{8}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:training_curves}{{6}{8}{Training convergence comparison between GPT-2 8M (FP32) and Ternary-Mamba 8M (1.58-bit). (a)~Validation loss. (b)~Perplexity (initial outliers $>500$ omitted for clarity)}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.6.3}Generation Quality}{8}{subsubsection.6.6.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Automatic text quality metrics. (a)~Character-level entropy: Ternary-Mamba (4.338) falls between GPT-2 3M (4.359) and GPT-2 8M (4.323), confirming comparable vocabulary utilization. (b)~3-gram repetition ratio: Ternary-Mamba (0.019) exhibits higher repetition than GPT-2 8M (0.004), indicating a measurable quantization-induced degradation in lexical diversity.}}{8}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:auto_metrics}{{7}{8}{Automatic text quality metrics. (a)~Character-level entropy: Ternary-Mamba (4.338) falls between GPT-2 3M (4.359) and GPT-2 8M (4.323), confirming comparable vocabulary utilization. (b)~3-gram repetition ratio: Ternary-Mamba (0.019) exhibits higher repetition than GPT-2 8M (0.004), indicating a measurable quantization-induced degradation in lexical diversity}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Authentic narrative generated on-device at 15.82 tokens/s. Despite the model truncation to 1M parameters, the output maintains grammatical structure and local narrative consistency.}}{9}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:generated_text}{{5}{9}{Authentic narrative generated on-device at 15.82 tokens/s. Despite the model truncation to 1M parameters, the output maintains grammatical structure and local narrative consistency}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Pareto Analysis}{9}{subsection.6.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Pareto Frontier showing the scaling law between model parameters, language coherence, and inference throughput. The 8M model occupies a strategic "sweet spot" for hardware-constrained storytelling, marking a clear phase transition from syntactic mimicry to semantic coherence.}}{9}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:pareto_frontier}{{8}{9}{Pareto Frontier showing the scaling law between model parameters, language coherence, and inference throughput. The 8M model occupies a strategic "sweet spot" for hardware-constrained storytelling, marking a clear phase transition from syntactic mimicry to semantic coherence}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{9}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{9}{Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Implications for Edge AI}{9}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Hardware Applicability and Portability}{9}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Coherence vs.\ Capability Trade-off}{9}{subsection.7.3}\protected@file@percent }
+\bibstyle{unsrt}
+\bibdata{references}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Limitations}{10}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Quantization-Induced Degradation Analysis}{10}{subsection.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Future Directions}{10}{subsection.7.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{10}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{10}{Conclusion}{section.8}{}}
+\bibcite{openai2023gpt4}{1}
+\bibcite{touvron2023llama}{2}
+\bibcite{team2023gemini}{3}
+\bibcite{karpathy2023llama2c}{4}
+\bibcite{eldan2023tinystories}{5}
+\bibcite{ma2024bitnet}{6}
+\bibcite{zhu2024matmulfree}{7}
+\bibcite{radford2019language}{8}
+\bibcite{pillutla2021mauve}{9}
+\bibcite{gunasekar2023textbooks}{10}
+\bibcite{wang2023bitnet}{11}
+\bibcite{bitnet2b4t2025}{12}
+\bibcite{llama4micro}{13}
+\gdef \@abspage@last{11}

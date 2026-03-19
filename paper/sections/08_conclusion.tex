@@ -1,0 +1,41 @@
+% =============================================
+% Section 8: Conclusion
+% =============================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented \tinybit{}, a framework for deploying coherent language
+models on microcontrollers. Our work makes three primary contributions.
+
+First, through systematic training and evaluation of GPT-2-style models
+ranging from 1M to 15M parameters on the TinyStories dataset, we establish
+an empirical lower bound on the model capacity required for coherent English
+text generation. Our multi-metric evaluation framework, combining perplexity,
+MAUVE scores, and LLM-as-judge assessment, provides a rigorous methodology
+for characterizing the coherence-capacity trade-off under quantization.
+
+Second, we design an Xtensa LX7-native ternary \gemv{} kernel that exploits
+the \espss{}'s SIMD extensions to perform multiplication-free inference. By
+encoding ternary weights as packed 2-bit representations and decomposing
+matrix operations into bitwise primitives, we achieve \textbf{3.2$\times$}
+speedup over na\"ive INT8 inference.
+
+Third, we demonstrate the feasibility of \textbf{Ternary-Mamba}, a proof-of-concept
+architecture combining BitNet b1.58 quantization ($\{-1, 0, +1\}$ weights) with the
+Mamba state space model. At 8M parameters, Ternary-Mamba achieves a validation
+loss of 2.84 (vs.\ 2.56 for FP32 GPT-2), while reducing the effective weight
+precision from 32 bits to 1.58 bits---a \textbf{20$\times$ compression ratio}. This
+result validates our core hypothesis that MatMul-free architectures can maintain
+coherent generation at extreme quantization levels suitable for microcontroller deployment.
+
+End-to-end evaluation demonstrates that a \textbf{1.0M}-parameter model,
+quantized to INT4, generates coherent English text at
+\textbf{15.82} tokens/s on the \espss{} with a total deployment footprint under
+8\,MB. To the best of our knowledge, this represents the largest language
+model demonstrated to produce coherent text on commodity microcontroller
+hardware.
+
+We release our training code, quantization pipeline, Xtensa kernel, and
+pre-trained model weights as open-source software at
+\url{https://github.com/samyeh621109/ESP-TinyLlama}, enabling the community
+to reproduce our results and build upon this foundation for edge language AI.

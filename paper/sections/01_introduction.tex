@@ -1,0 +1,77 @@
+% =============================================
+% Section 1: Introduction
+% =============================================
+\section{Introduction}
+\label{sec:introduction}
+
+The proliferation of large language models (LLMs) has transformed natural
+language processing, with models such as GPT-4~\cite{openai2023gpt4},
+LLaMA~\cite{touvron2023llama}, and Gemini~\cite{team2023gemini} achieving
+human-level fluency across diverse tasks. However, these achievements come at
+significant computational cost: even the smallest production-grade models
+require gigabytes of memory and substantial floating-point throughput,
+effectively restricting deployment to cloud infrastructure and high-end consumer
+hardware.
+
+This stands in stark contrast to the billions of deployed microcontrollers
+(MCUs) that power IoT devices, wearable electronics, and industrial sensors.
+The Espressif \espss{}, a representative modern MCU, features a dual-core
+Xtensa LX7 processor at 240\,MHz with only 8\,MB of external \psram{} and up
+to 16\,MB of Flash storage. Running any form of coherent language generation on
+such hardware was, until recently, considered infeasible.
+
+Recent developments have begun to challenge this assumption. Karpathy's
+\texttt{llama2.c}~\cite{karpathy2023llama2c} demonstrated that a minimal
+C-based Transformer implementation can run inference on extremely small models.
+Microsoft's TinyStories~\cite{eldan2023tinystories} showed that models with as
+few as 2.5M parameters can produce grammatically correct and contextually
+consistent text when trained on a carefully curated dataset. Meanwhile,
+the BitNet b1.58 architecture~\cite{ma2024bitnet} proved that ternary
+weights (\{-1, 0, +1\}) can match full-precision performance at dramatically
+reduced computational cost, and Zhu et al.'s Matmul-free
+LLM~\cite{zhu2024matmulfree} eliminated matrix multiplication entirely
+through scalable bitwise operations. On the embedded front,
+MambaLite-Micro~\cite{mambalite2024} validated state space model (SSM)
+inference on \espss{} with 83\% memory reduction over Transformer baselines.
+
+Despite these advances, a critical question remains unanswered:
+\emph{What is the minimum model capacity required to generate coherent
+English text within the memory constraints of a commodity microcontroller?}
+No existing work systematically establishes this lower bound or demonstrates
+how architecture-specific hardware optimizations can push it further.
+
+In this paper, we present \tinybit{}, a framework that addresses this gap
+through two complementary contributions:
+
+\begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=1pt]
+  \item \textbf{Language Coherence Lower Bound Analysis.} We train a family of
+        GPT-2-style~\cite{radford2019language} models at four scales
+        (1M, 3M, 8M, and 15M parameters) on the TinyStories dataset and
+        systematically evaluate their language coherence under progressive
+        quantization (FP32 $\rightarrow$ INT8 $\rightarrow$ INT4). We propose
+        a multi-metric evaluation framework combining perplexity, MAUVE
+        score~\cite{pillutla2021mauve}, and LLM-as-judge assessment to
+        establish a Pareto frontier between model capacity, quantization level,
+        and coherence quality.
+
+  \item \textbf{Xtensa-Native Bitwise Inference Kernel.} We design a ternary
+        General Matrix-Vector multiplication (\gemv{}) kernel that exploits the
+        Xtensa LX7's SIMD extensions (EE instruction set) to perform
+        inference without floating-point multiplication. By encoding ternary
+        weights as packed 2-bit representations and decomposing \gemv{} into
+        bitwise AND, XOR, and population count operations, we achieve
+        significant speedup over conventional INT8 inference on the \espss{}.
+\end{enumerate}
+
+Together, these contributions enable end-to-end language model inference on the
+\espss{} with a deployment footprint under 8\,MB, demonstrating coherent
+English text generation on commodity microcontroller hardware for the first
+time at meaningful model scales.
+
+The remainder of this paper is organized as follows. Section~\ref{sec:related}
+reviews related work in efficient LLMs and MCU deployment. Section~\ref{sec:problem}
+formalizes the constrained inference problem. Section~\ref{sec:coherence}
+presents our coherence lower bound experiments. Section~\ref{sec:kernel}
+describes the Xtensa-native kernel design. Section~\ref{sec:evaluation}
+reports end-to-end evaluation results. Section~\ref{sec:discussion} discusses
+implications and limitations, and Section~\ref{sec:conclusion} concludes.
