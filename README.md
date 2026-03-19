@@ -63,14 +63,12 @@ If you find this work useful, please cite our arXiv preprint:
 
 ---
 
-## 🔒 Intellectual Property Attestation
+## 🔒 Intellectual Property Provenance (IP Attestation)
 
-The official version of the manuscript [2026_TinyBit_Yeh.pdf] has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
+The official version of the manuscript **[2026_TinyBit_Yeh.pdf]** has been verified with the following SHA-256 digital digest. This fingerprint has been archived within this repository's GitHub Commit history on **2026-03-19** to establish authorship priority and content integrity:
 
 **SHA-256 Digest:**  
 `0413159958fa3e59092490cc11bb7ce36735a289f6d744b6118d538eec55909f`
-
-Archived on GitHub: 2026-03-19
 
 ## 🤝 Acknowledgments
 This research builds upon [TinyStories](https://arxiv.org/abs/2305.07759), [BitNet b1.58](https://arxiv.org/abs/2402.17764), and [Mamba](https://arxiv.org/abs/2312.00752).
