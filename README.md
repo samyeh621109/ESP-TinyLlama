@@ -20,7 +20,7 @@ This repository contains the official implementation of **TinyBit**, a framework
 |----------------------|-----------|----------|------------|------------------|
 | GPT-2 8M (Baseline)   | FP32      | 2.56     | 12.94      | 0.004            |
 | **Ternary-Mamba 8M** | **1.58b** | **2.84** | **17.06**  | **0.019**        |
-| GPT-2 3M (Baseline)   | FP32      | 3.17     | 23.78      | -                |
+| GPT-2 3M (Baseline)   | FP32      | 3.17     | 23.78      | 0.045            |
 
 Despite a **20x compression ratio**, Ternary-Mamba 8M outperforms a 3M FP32 model and approaches the 8M FP32 baseline in coherence, while significantly reducing memory footprint.
 
