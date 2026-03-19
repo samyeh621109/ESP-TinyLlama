@@ -30,8 +30,7 @@ def train(args):
     train_data = np.fromfile("training/data/train.bin", dtype=np.uint16)
     val_data = np.fromfile("training/data/validation.bin", dtype=np.uint16)
     
-    # 這裡的 vocab_size 必須對應自定義 Tokenizer (e.g., 32000)
-    # 如果未來需要更靈活，可以從 tokenizer.json 讀取
+    # 這裡的 vocab_size 須與 Tokenizer 訓練設定一致 (預設 32000)
     VOCAB_SIZE = args.vocab_size 
     
     # 模型配置
