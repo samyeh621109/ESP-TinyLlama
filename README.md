@@ -28,12 +28,11 @@ Despite a **20x compression ratio**, Ternary-Mamba 8M outperforms a 3M FP32 mode
 
 ```text
 .
-├── tinybit/          # Core library (models, kernels)
-│   ├── training/     # Training scripts (train_mamba.py, etc.)
-│   └── fixed/        # Evaluation and generation scripts
-# Repository focus: core library and training scripts            # LaTeX manuscript and submission-ready figures
-          # Generated samples and evaluation results
-└── docs/             # Technical progress reports
+├── assets/           # Research figures and visualization assets
+├── tinybit/          # Core library (models, kernels, and inference)
+│   ├── training/     # Training suite (train.py, prepare_data.py, export.py)
+│   └── samples/      # Inference evaluation and generated text samples
+└── README.md         # Full project documentation
 ```
 
 ## 👣 Getting Started
@@ -43,10 +42,10 @@ Despite a **20x compression ratio**, Ternary-Mamba 8M outperforms a 3M FP32 mode
 - PyTorch 2.x
 - `mamba-ssm` for Mamba evaluations.
 
-### Run Ternary-Mamba Inference
+### Run Inference Evaluation
 ```bash
 cd tinybit/samples
-python test_generate.py --model_path ../training/data/mamba_results_8M.csv
+python test_generate.py
 ```
 
 ## 📜 Citation
@@ -56,7 +55,7 @@ If you find this work useful, please cite our arXiv preprint:
 ```bibtex
 @article{yeh2026tinybit,
   title={TinyBit: Coherent Language Modeling on Microcontrollers via MatMul-free Ternary Mamba},
-  author={Yeh, [Your Full Name]},
+  author={Yeh, Sung-Lin},
   journal={arXiv preprint arXiv:2603.XXXXX},
   year={2026}
 }
@@ -66,7 +65,7 @@ If you find this work useful, please cite our arXiv preprint:
 
 ## 🔒 Intellectual Property Attestation
 
-The official version of the manuscript the 2026_TinyBit_Yeh.pdf manuscript has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
+The official version of the manuscript [2026_TinyBit_Yeh.pdf] has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
 
 **SHA-256 Digest:**  
 `0413159958fa3e59092490cc11bb7ce36735a289f6d744b6118d538eec55909f`
