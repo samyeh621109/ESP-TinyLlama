@@ -1,8 +1,8 @@
 # ESP-TinyLlama: Coherent Language Modeling on Microcontrollers
 
 <p align="center">
-  <img src="paper/figures/training_curves_comparison.png" width="400">
-  <img src="paper/figures/auto_metrics.png" width="400">
+  <img src="assets/training_curves_comparison.png" width="400">
+  <img src="assets/auto_metrics.png" width="400">
 </p>
 
 This repository contains the official implementation of **TinyBit**, a framework for deploying coherent language models on resource-constrained microcontrollers (MCUs). Our work explores the Pareto frontier of model capacity vs. language coherence and introduces a novel **Ternary-Mamba** proof-of-concept for extreme hardware efficiency.
@@ -31,8 +31,8 @@ Despite a **20x compression ratio**, Ternary-Mamba 8M outperforms a 3M FP32 mode
 ├── tinybit/          # Core library (models, kernels)
 │   ├── training/     # Training scripts (train_mamba.py, etc.)
 │   └── fixed/        # Evaluation and generation scripts
-├── paper/            # LaTeX manuscript and submission-ready figures
-├── results/          # Generated samples and evaluation results
+# Repository focus: core library and training scripts            # LaTeX manuscript and submission-ready figures
+          # Generated samples and evaluation results
 └── docs/             # Technical progress reports
 ```
 
@@ -45,8 +45,8 @@ Despite a **20x compression ratio**, Ternary-Mamba 8M outperforms a 3M FP32 mode
 
 ### Run Ternary-Mamba Inference
 ```bash
-cd tinybit/fixed
-python batch_generate.py --model_path ../training/data/mamba_results_8M.csv
+cd tinybit/samples
+python test_generate.py --model_path ../training/data/mamba_results_8M.csv
 ```
 
 ## 📜 Citation
@@ -66,7 +66,7 @@ If you find this work useful, please cite our arXiv preprint:
 
 ## 🔒 Intellectual Property Attestation
 
-The official version of the manuscript [2026_TinyBit_Yeh.pdf](paper/2026_TinyBit_Yeh.pdf) has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
+The official version of the manuscript the 2026_TinyBit_Yeh.pdf manuscript has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
 
 **SHA-256 Digest:**  
 `0413159958fa3e59092490cc11bb7ce36735a289f6d744b6118d538eec55909f`
