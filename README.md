@@ -1,8 +1,8 @@
 # ESP-TinyLlama: Coherent Language Modeling on Microcontrollers
 
 <p align="center">
-  <img src="paper/figures/training_curves_comparison.pdf" width="400">
-  <img src="paper/figures/auto_metrics.pdf" width="400">
+  <img src="paper/figures/training_curves_comparison.png" width="400">
+  <img src="paper/figures/auto_metrics.png" width="400">
 </p>
 
 This repository contains the official implementation of **TinyBit**, a framework for deploying coherent language models on resource-constrained microcontrollers (MCUs). Our work explores the Pareto frontier of model capacity vs. language coherence and introduces a novel **Ternary-Mamba** proof-of-concept for extreme hardware efficiency.
