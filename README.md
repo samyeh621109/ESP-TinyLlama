@@ -62,5 +62,16 @@ If you find this work useful, please cite our arXiv preprint:
 }
 ```
 
+---
+
+## 🔒 Intellectual Property Attestation
+
+The official version of the manuscript [2026_TinyBit_Yeh.pdf](paper/2026_TinyBit_Yeh.pdf) has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
+
+**SHA-256 Digest:**  
+`b787731606b8a73a7be123d49935f06553c1073227e4d7d498c397a1f4b55338`
+
+Archived on GitHub: 2026-03-19
+
 ## 🤝 Acknowledgments
 This research builds upon [TinyStories](https://arxiv.org/abs/2305.07759), [BitNet b1.58](https://arxiv.org/abs/2402.17764), and [Mamba](https://arxiv.org/abs/2312.00752).
