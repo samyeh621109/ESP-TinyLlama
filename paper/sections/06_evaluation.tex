@@ -142,6 +142,13 @@ GPT-2 3M (FP32)         & 32   & 50K  & 3.17 & 23.78 \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/project_summary_viz.png}
+    \caption{Ternary-Mamba Analysis: (Left) Weight distribution demonstrating the 1.58-bit (ternary) property of the quantized model; (Right) Validation loss convergence comparison between the FP32 baseline and the 1.58-bit Ternary-Mamba model.}
+    \label{fig:ternary_analysis}
+\end{figure}
+
 Despite using only 1.58-bit weights, the Ternary-Mamba achieves a validation loss of 2.84, substantially outperforming the FP32 3M model (3.17) and approaching the FP32 8M baseline (2.56). Figure~\ref{fig:training_curves} illustrates the training dynamics of both 8M models.
 
 \begin{figure}[H]

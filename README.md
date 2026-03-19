@@ -69,7 +69,7 @@ If you find this work useful, please cite our arXiv preprint:
 The official version of the manuscript [2026_TinyBit_Yeh.pdf](paper/2026_TinyBit_Yeh.pdf) has been archived with the following SHA-256 digital digest to ensure integrity and establishment of priority:
 
 **SHA-256 Digest:**  
-`b787731606b8a73a7be123d49935f06553c1073227e4d7d498c397a1f4b55338`
+`0413159958fa3e59092490cc11bb7ce36735a289f6d744b6118d538eec55909f`
 
 Archived on GitHub: 2026-03-19
 
