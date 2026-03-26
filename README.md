@@ -72,10 +72,13 @@ If you find this work useful, please cite our official preprint on Zenodo:
 
 ## 🔒 Intellectual Property Provenance (IP Attestation)
 
-The official version of the manuscript **[2026_TinyBit_Yeh.pdf]** has been verified with the following SHA-256 digital digest. This fingerprint has been archived within this repository's GitHub Commit history on **2026-03-19** to establish authorship priority and content integrity:
+To ensure authorship priority, content integrity, and scientific reproducibility, the official version of this manuscript (**`Yeh_2026_TinyBit_Ternary_Mamba_MCU.pdf`**) has been permanently archived on Zenodo. The exact file is verifiable via its cryptographic hash:
 
 **SHA-256 Digest:**  
-`0413159958fa3e59092490cc11bb7ce36735a289f6d744b6118d538eec55909f`
+`8f2ec4cdbfcaaadbeb029bf78a2bcf41ff85d836a7a6dedbc555b6a5e55a258a`
+
+**Archival Record & Timestamps:**  
+Accessible at [10.5281/zenodo.19228755](https://doi.org/10.5281/zenodo.19228755)
 
 ## 🤝 Acknowledgments
 This research builds upon [TinyStories](https://arxiv.org/abs/2305.07759), [BitNet b1.58](https://arxiv.org/abs/2402.17764), and [Mamba](https://arxiv.org/abs/2312.00752).
