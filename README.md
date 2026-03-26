@@ -1,5 +1,9 @@
 # ESP-TinyLlama: Coherent Language Modeling on Microcontrollers
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19228755.svg)](https://doi.org/10.5281/zenodo.19228755)
+
+> 📄 **The full preprint manuscript for this research is officially available on Zenodo:** [10.5281/zenodo.19228755](https://doi.org/10.5281/zenodo.19228755)
+
 <p align="center">
   <img src="assets/training_curves_comparison.png" width="400">
   <img src="assets/auto_metrics.png" width="400">
@@ -50,14 +54,17 @@ python test_generate.py
 
 ## 📜 Citation
 
-If you find this work useful, please cite our arXiv preprint:
+If you find this work useful, please cite our official preprint on Zenodo:
 
 ```bibtex
-@article{yeh2026tinybit,
-  title={TinyBit: Coherent Language Modeling on Microcontrollers via MatMul-free Ternary Mamba},
-  author={Yeh, Sung-Lin},
-  journal={arXiv preprint arXiv:2603.XXXXX},
-  year={2026}
+@misc{yeh_2026_tinybit,
+  author       = {Yeh, Sung-Lin},
+  title        = {TinyBit: Coherent Language Modeling on Microcontrollers via MatMul-free Ternary Mamba},
+  month        = mar,
+  year         = 2026,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.19228755},
+  url          = {https://doi.org/10.5281/zenodo.19228755}
 }
 ```
 
